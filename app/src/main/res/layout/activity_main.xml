@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <AutoCompleteTextView
+        android:id="@+id/auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="#F5F0F0"
+        android:hint="Topic"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/auto"
+        android:layout_marginTop="50dp"
+        android:hint="Content..."
+        android:textColor="#102BCC"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:text="ADD" />
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/add"
+        android:text="Search" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search"
+        android:src = "@drawable/sticky"/>
+</RelativeLayout>
