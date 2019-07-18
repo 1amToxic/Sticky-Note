@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             case R.id.about:{
-                Toast.makeText(this, "Made by Lam", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Made by LamKz", Toast.LENGTH_SHORT).show();
                 return true;
             }
             case R.id.search:{
