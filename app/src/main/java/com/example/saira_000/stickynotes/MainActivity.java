@@ -3,6 +3,9 @@ package com.example.saira_000.stickynotes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextPaint;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -36,12 +39,13 @@ public class MainActivity extends AppCompatActivity {
     Button btnadd, btnsearch;
     EditText editText;
     String[] Topic = {""};
-
+    ArrayList<Option> arrayList;
+    ArrayAdapter adapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ArrayList<Option> arrayList = new ArrayList<>();
-        final ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, Topic);
+        arrayList = new ArrayList<>();
+        adapter= new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, Topic);
         editText = (EditText) findViewById(R.id.content);
         btnadd = (Button) findViewById(R.id.add);
         btnadd.setOnClickListener(new View.OnClickListener() {
@@ -95,5 +99,60 @@ public class MainActivity extends AppCompatActivity {
         }
         return -1;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_actions, menu);
 
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add:{
+                String hint = autoCompleteTextView.getText().toString().trim();
+                String contenT = editText.getText().toString().trim();
+                System.out.println(hint + "\n" + contenT);
+                if (!hint.equals("") && !contenT.equals("")) {
+                    Option op = new Option();
+                    op.setTopic(hint);
+                    op.setContent(contenT);
+                    if (isExist(hint) == -1) {
+                        adapter.add(op.getTopic().toString());
+                    }
+                    arrayList.add(op);
+                    autoCompleteTextView.setText("");
+                    editText.setText("");
+                }
+                return true;
+            }
+
+            case R.id.about:{
+                Toast.makeText(this, "Made by Lam", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            case R.id.search:{
+                boolean canFind = false;
+                String findtopic = autoCompleteTextView.getText().toString().trim();
+                for (Option s : arrayList) {
+                    if (s.getTopic().equals(findtopic)) {
+                        editText.setText(s.getContent());
+                        canFind = true;
+                        break;
+                    }
+                }
+                if (canFind == false) {
+                    Toast.makeText(MainActivity.this, "Can not find. Plz Add", Toast.LENGTH_SHORT).show();
+                    editText.requestFocus();
+                }
+                return true;
+            }
+            case R.id.help:{
+                Toast.makeText(this, "Call Lam", Toast.LENGTH_SHORT).show();
+                return  true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
